@@ -1,0 +1,132 @@
+/* I built this data from scratch using real players and real statistics.
+This exercise was meant to give me practice joining different tables. */
+
+CREATE TABLE footballers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    club TEXT,
+    position TEXT,
+    age INTEGER);
+
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Lautaro Martinez", "Inter", "Striker", 26);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Marcus Thuram", "Inter", "Striker", 26);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Romelu Lukaku", "Roma", "Striker", 30);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Joshua Zirkzee", "Bologna", "Striker", 22);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Victor Osimhen", "Napoli", "Striker", 24);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Nico Gonzalez", "Fiorentina", "Right Wing", 25);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Khvicha Kvaratskhelia", "Napoli", "Left Wing", 22);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Teun Koopmeiners", "Atalanta", "Midfield", 25);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Nicolo Barella", "Inter", "Midfield", 26);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Giacomo Bonaventura", "Fiorentina", "Midfield", 34);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Hakan Calhanoglu", "Inter", "Midfield", 29);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Lewis Ferguson", "Bologna", "Midfield", 24);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Antonio Candreva", "Salernitana", "Midfeild", 36);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Alessandro Buongiorno", "Torino", "Defense", 24);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Ricardo Calafiori", "Bologna", "Defense", 21);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Federico Dimarco", "Inter", "Defense", 26);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Alessandro Bastoni", "Inter", "Defense", 24);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Federico Gatti", "Juventus", "Defense", 25);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Fikayo Tomori", "Milan", "Defense", 25);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Mike Maignan", "Milan", "Keeper", 28);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Yann Sommer", "Inter", "Keeper", 35);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Wojciech Szczesny", "Juventus", "Keeper", 33);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Michele Di Gregorio", "Monza", "Keeper", 26);
+INSERT INTO footballers (fullname, club, position, age) VALUES ("Wladimiro Falcone", "Lecce", "Keeper", 28);
+
+
+CREATE TABLE nationality (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    country TEXT);
+
+INSERT INTO nationality (person_id, country) VALUES (1, "Argentina");
+INSERT INTO nationality (person_id, country) VALUES (2, "France");
+INSERT INTO nationality (person_id, country) VALUES (3, "Belgium");
+INSERT INTO nationality (person_id, country) VALUES (4, "Netherlands");
+INSERT INTO nationality (person_id, country) VALUES (5, "Nigeria");
+INSERT INTO nationality (person_id, country) VALUES (6, "Argentina");
+INSERT INTO nationality (person_id, country) VALUES (7, "Georgia");
+INSERT INTO nationality (person_id, country) VALUES (8, "Netherlands");
+INSERT INTO nationality (person_id, country) VALUES (9, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (10, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (11, "Turkey");
+INSERT INTO nationality (person_id, country) VALUES (12, "Scotland");
+INSERT INTO nationality (person_id, country) VALUES (13, "Italy");INSERT INTO nationality (person_id, country) VALUES (14, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (15, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (16, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (17, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (18, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (19, "England");
+INSERT INTO nationality (person_id, country) VALUES (20, "France");
+INSERT INTO nationality (person_id, country) VALUES (21, "Switzerland");
+INSERT INTO nationality (person_id, country) VALUES (22, "Poland");
+INSERT INTO nationality (person_id, country) VALUES (23, "Italy");
+INSERT INTO nationality (person_id, country) VALUES (24, "Italy");
+
+
+CREATE TABLE jersey_number (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    number INTEGER);
+    
+INSERT INTO jersey_number (person_id, number) VALUES (1, 10);
+INSERT INTO jersey_number (person_id, number) VALUES (2, 9);
+INSERT INTO jersey_number (person_id, number) VALUES (3, 90);
+INSERT INTO jersey_number (person_id, number) VALUES (4, 9);
+INSERT INTO jersey_number (person_id, number) VALUES (5, 9);
+INSERT INTO jersey_number (person_id, number) VALUES (6, 10);
+INSERT INTO jersey_number (person_id, number) VALUES (7, 77);
+INSERT INTO jersey_number (person_id, number) VALUES (8, 10);
+INSERT INTO jersey_number (person_id, number) VALUES (9, 23);
+INSERT INTO jersey_number (person_id, number) VALUES (10, 5);
+INSERT INTO jersey_number (person_id, number) VALUES (11, 20);
+INSERT INTO jersey_number (person_id, number) VALUES (12, 19);
+INSERT INTO jersey_number (person_id, number) VALUES (13, 87);
+INSERT INTO jersey_number (person_id, number) VALUES (14, 4);
+INSERT INTO jersey_number (person_id, number) VALUES (15, 33);
+INSERT INTO jersey_number (person_id, number) VALUES (16, 32);
+INSERT INTO jersey_number (person_id, number) VALUES (17, 95);
+INSERT INTO jersey_number (person_id, number) VALUES (18, 4);
+INSERT INTO jersey_number (person_id, number) VALUES (19, 23);
+INSERT INTO jersey_number (person_id, number) VALUES (20, 16);
+INSERT INTO jersey_number (person_id, number) VALUES (21, 1);
+INSERT INTO jersey_number (person_id, number) VALUES (22, 1);
+INSERT INTO jersey_number (person_id, number) VALUES (23, 16);
+INSERT INTO jersey_number (person_id, number) VALUES (24, 30);
+
+SELECT * 
+FROM footballers
+JOIN nationality
+ON footballers.id = nationality.id
+JOIN jersey_number
+ON footballers.id = jersey_number.id ;
+
+/* I want to match the players with their jersey numbers from 
+different tables.  */
+
+SELECT footballers.fullname AS "PLAYER", jersey_number.number AS "Jersey Number" 
+from footballers
+JOIN jersey_number
+ON footballers.id = jersey_number.id
+ORDER BY jersey_number.number DESC;
+
+/* I want to see which nationalities are represented
+in this player pool, needing to join a seperate table to find
+the data. */
+
+SELECT footballers.fullname AS "PLAYER", footballers.position AS "POSITION", nationality.country AS "NATIONALITY" from footballers
+INNER JOIN nationality
+ON footballers.id = nationality.id
+ORDER BY nationality.country;
+
+
+/* I watched a Bologna FC game and was really impressed by their Dutch striker, 
+but I forget his name. I'll do a quick joined search to find his name. */
+
+SELECT f.fullname, f.club, f.position, n.country
+FROM footballers AS f
+  JOIN nationality AS n
+  ON f.id = n.id
+WHERE n.country = "Netherlands" 
+AND f.position = "Striker" 
+AND f.club = "Bologna";
