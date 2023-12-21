@@ -27,3 +27,82 @@ time_signature integer NOT NULL
 #Then I inserted the Spotify Data .csv into the table.
 
 #Next, I explored the data using the following SQL. 
+
+
+SELECT * FROM Spotifydata;
+
+/* I want to label the varing degrees of popularity for these songs. 
+First I will find the average popularity, then label the songs based on 
+this average. */
+
+SELECT avg(popularity)
+FROM Spotifydata;
+
+SELECT artist_name, track_name, popularity,
+CASE
+    WHEN popularity <= (86.8 - 6) THEN 'Below Average Popularity'
+    WHEN popularity <= (86.8 - 2) THEN 'Slightly Below Average Popularity'
+    WHEN popularity > (86.8 + 6) THEN 'Most Popular' 
+    WHEN popularity >= (86.8+ 2) THEN 'Above Average Popularity'  
+    ELSE 'Average Popularity'  
+    END AS popularity_range
+FROM Spotifydata
+GROUP BY track_name
+Order By popularity;
+
+/* How many songs featured another artist? */
+
+SELECT COUNT(track_name) AS songs_with_feat
+FROM Spotifydata
+WHERE track_name LIKE "%feat%"
+OR track_name LIKE "%(with%";
+
+/* Which artists had the most top 50 songs? */
+
+SELECT artist_name, COUNT(artist_name) AS top50_songs
+FROM Spotifydata
+GROUP BY artist_name
+HAVING top50_songs > 1
+ORDER BY top50_songs DESC;
+
+/* What was the average speechiness to the top 10 most danceable songs? */
+SELECT avg(speechiness)
+FROM (SELECT * 
+FROM Spotifydata 
+ORDER BY danceability DESC 
+LIMIT 10);
+
+/* What was the average duration for the 10 most popular songs? */
+
+SELECT AVG(duration_ms) AS avg_duration_top10
+FROM Spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+/* Which artist had the most "speechiness" to their songs? */
+
+SELECT artist_name, AVG(speechiness) AS avg_speechiness
+FROM Spotifydata
+GROUP BY artist_name
+ORDER BY avg_speechiness DESC
+LIMIT 1;
+
+/* Assuming the scoring is on a comparable scale, is song popularity more correlated to 'danceability' or 'energy'? */
+SELECT ROUND(AVG(danceability*100)) AS avg_danceability, 
+ROUND(AVG(energy*100)) AS avg_energy
+FROM Spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+
+/* What were the 10 longest songs on this list, and how did it correlate to its ranking in the top 50? */
+SELECT id,artist_name, track_name, duration_ms
+FROM Spotifydata
+ORDER BY duration_ms DESC
+LIMIT 10;
+
+/* What about the inverse? What were the 10 shortest songs and their ranking in the top 50? */
+SELECT id,artist_name, track_name, duration_ms
+FROM Spotifydata
+ORDER BY duration_ms ASC
+LIMIT 10;
