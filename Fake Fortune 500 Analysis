@@ -92,6 +92,19 @@ CASE
 FROM fortune_companies
 ORDER BY avg_employee_tenure;
 
+/* Is there any correlation between the size of the company
+and the average employee tenure? Do smaller/bigger companies correlate
+to greater employee satisfaction? */
+
+SELECT AVG(avg_employee_tenure),
+CASE
+  WHEN employees < 3000 THEN 'Small Company'
+  WHEN employees < 10000 THEN 'Mid-Size Company'
+  ELSE 'Large Company'
+  END company_size
+FROM fortune_companies
+GROUP BY company_size;
+
 /* Which industries are doing the best retaining their employees? */
 
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS avg_tenure
