@@ -73,9 +73,15 @@ AND maternity_leave_weeks >= 12;
 
 SELECT company_name, industry, avg_employee_tenure,
 CASE
-  WHEN avg_employee_tenure < 5 THEN "Below Average"
-  WHEN avg_employee_tenure < 7 THEN "Average"
-  ELSE "Above Average"
-  END "Employee Retention Score"
+  WHEN avg_employee_tenure < 5 THEN 'Below Average'
+  WHEN avg_employee_tenure < 7 THEN 'Average'
+  ELSE 'Above Average'
+  END 'Employee Retention Score'
 FROM fortune_companies
 ORDER BY avg_employee_tenure DESC;
+
+/* Which industries are doing the best retaining their employees? */
+SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS avg_tenure
+FROM fortune_companies
+GROUP BY industry
+ORDER BY avg_tenure DESC;
