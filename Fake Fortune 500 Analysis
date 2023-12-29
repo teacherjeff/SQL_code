@@ -80,6 +80,18 @@ CASE
 FROM fortune_companies
 ORDER BY avg_employee_tenure DESC;
 
+/* Does low employee tenure correlate to no healthcare
+benefits being offered? */
+
+SELECT healthcare_benefits,
+CASE
+  WHEN avg_employee_tenure < 5 THEN 'Below Average'
+  WHEN avg_employee_tenure < 7 THEN 'Average'
+  ELSE 'Above Average'
+  END 'Employee Retention Score'
+FROM fortune_companies
+ORDER BY avg_employee_tenure;
+
 /* Which industries are doing the best retaining their employees? */
 
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS avg_tenure
