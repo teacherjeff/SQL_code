@@ -1,3 +1,6 @@
+/* This was my first SQL project. I ran some queries to find the answer to questions I thought my 
+boss might want to know using our store's data. */
+
 
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,
