@@ -81,7 +81,16 @@ FROM fortune_companies
 ORDER BY avg_employee_tenure DESC;
 
 /* Which industries are doing the best retaining their employees? */
+
 SELECT industry, ROUND(AVG(avg_employee_tenure),1) AS avg_tenure
 FROM fortune_companies
 GROUP BY industry
 ORDER BY avg_tenure DESC;
+
+/* Who are the top 5 companies in terms of revenue:employee ratio? 
+
+I'm assuming 'revenue' is listed in billions. */
+SELECT company_name, ROUND((revenue*1000000000/employees),0) AS revenue_to_employee_ratio
+FROM fortune_companies
+ORDER BY revenue_to_employee_ratio DESC 
+LIMIT 5;
